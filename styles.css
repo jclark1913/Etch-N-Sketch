@@ -49,13 +49,22 @@ body{
     width: 90%;
 }
 
-#show-grid-lines {
+#toggle-grid-lines {
     width: 100%;
 }
 
 .slider-box {
     width: 90%;
     padding-top: 50px;
+    outline: 1px black solid;
+}
+
+#size-slider {
+    width: 90%;
+}
+
+#size-indicator-text {
+    margin-top: 5px;
 }
 
 .grid-wrapper {
@@ -94,5 +103,4 @@ body{
     background-color: white;
     margin: 0;
     padding: 0;
-    outline: 1px #000 solid;
 }
