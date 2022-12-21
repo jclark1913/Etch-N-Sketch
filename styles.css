@@ -1,0 +1,98 @@
+body{
+    margin: 0;
+}
+
+.site-container{
+    display: flex;
+    flex-direction:column;
+    min-height:100vh;
+
+}
+
+.header{
+    flex: 0 0 auto;
+    text-align: center;
+    background: grey;
+}
+
+.main {
+    flex: 1 0 auto;
+    text-align: center;
+    display: flex;
+}
+
+.main-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 0 auto;
+}
+
+.options-bar {
+    flex: 1 0 auto;
+    min-height: 750px;
+    background-color: skyblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.stroke-options {
+    width: 90%;
+}
+
+#show-grid-lines {
+    width: 100%;
+}
+
+.slider-box {
+    width: 90%;
+    padding-top: 50px;
+}
+
+.grid-wrapper {
+    flex: 1 0 auto;
+    min-height: 750px;
+    background: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-container {
+    height: 700px;
+    width: 700px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: greenyellow;
+    outline: 1px #000 solid;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.footer {
+    flex: 0 0 auto;
+    text-align: center;
+    background: grey;
+}
+
+.single-cell {
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    outline: 1px #000 solid;
+}

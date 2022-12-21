@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Etch-N-Sketch</title>
+</head>
+
+<body>
+    <div class="site-container">
+        <header class="header">
+            <h3>{ Etch-N-Sketch }</h3>
+        </header>
+        <main class="main">
+            <div class="main-container">
+                <div class="options-bar">
+                    <p>OPTIONS BAR</p>
+                    <div class="button-container">
+                        <button class="stroke-options">Click me</button>
+                        <button class="stroke-options">Click me</button>
+                        <button class="stroke-options">Click me</button>
+                        <button class="stroke-options">Click me</button>
+                        <button class="stroke-options">Click me</button>
+                        <div class="slider-box">
+                            <input type="range" min="16" max="64" value="24" id="size-slider">
+                            <p id="size-indicator-text">Grid Size</p>
+                            <button class="stroke-options" id="show-grid-lines">Toggle Grid Lines</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-wrapper" id="grid-wrapper">
+                    <div class="grid-container" id="grid-container"></div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <p>Created by JC</p>
+        </footer>
+    </div>
+
+    <!--Scripts-->
+    <script src="scripts.js"></script>
+</body>
+
+</html>
