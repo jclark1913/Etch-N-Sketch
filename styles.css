@@ -38,6 +38,8 @@ body{
     display: flex;
     flex-direction: column;
     max-width: 400px;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-container {
@@ -48,13 +50,13 @@ body{
     align-items: center;
     gap: 10px;
     margin-top: 70px;
-    max-width: 300px;
-    min-width: 150px;
-    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .stroke-options {
-    width: 90%;
+    width: 80%;
 }
 
 #toggle-grid-lines {
@@ -62,13 +64,13 @@ body{
 }
 
 .slider-box {
-    width: 90%;
     padding-top: 50px;
     outline: 1px black solid;
+    width: 80%;
 }
 
 #size-slider {
-    width: 90%;
+    width: 80%;
 }
 
 #size-indicator-text {
@@ -93,7 +95,7 @@ body{
     padding: 0;
     border: 0;
     background-color: greenyellow;
-    outline: 1px #000 solid;
+    outline: 1px rgb(61, 60, 60) solid;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;

@@ -1,27 +1,79 @@
-// Initialize + populate grid on page load
+// Variable declarations
 let singleCell;
 let gridContainer = document.getElementById('grid-container');
 populateGrid(24);
+let allGridItems = document.querySelectorAll(".single-cell");
 
 // Drawing functionality
+
+// Stroke Color Selector
+
+strokeColorSelector = document.getElementById("stroke-color-selector");
+strokeColorSelector.addEventListener("change", changeStrokeColor);
+let strokeColor = strokeColorSelector.value;
+
+function changeStrokeColor() {
+    strokeColor = strokeColorSelector.value;
+}
+
+// Background Color Selector
+
+backgroundColorSelector = document.getElementById("background-color-selector");
+backgroundColorSelector.addEventListener("change", changeBackgroundColor);
+let backgroundColor = backgroundColorSelector.value;
+
+function changeBackgroundColor() {
+    backgroundColor = backgroundColorSelector.value;
+    allGridItems.forEach(function (gridItem) {
+        if (gridItem.getAttribute("isDrawn") === "") {
+            gridItem.style.backgroundColor = backgroundColor
+        }
+    });
+}
+
+let eraserActivated = false;
+let previousColor;
 
 let isMouseDown = false;
 
 document.addEventListener('mousedown', function () {
     isMouseDown = true;
-    console.log(isMouseDown)
 });
 
 document.addEventListener('mouseup', function () {
     isMouseDown = false;
-    console.log(isMouseDown)
 })
 
-function fillCell() {
+function fillCellOnClick() {
+    this.style.backgroundColor = strokeColor;
+    this.setAttribute("isDrawn", "true")
+}
+
+function fillCellOnHover() {
     if (isMouseDown) {
-        this.style.backgroundColor = "#000FFF";
+        this.style.backgroundColor = strokeColor;
+        this.setAttribute("isDrawn", "true")
     }
 };
+
+// Init
+
+
+// Eraser functionality
+
+let eraserButton = document.getElementById("eraser-button");
+eraserButton.addEventListener("click", toggleEraser);
+
+function toggleEraser() {
+    eraserActivated = !eraserActivated;
+    if (eraserActivated) {
+        previousColor = strokeColor;
+        strokeColor = backgroundColor;
+    } else {
+        strokeColor = previousColor;
+    }
+    console.log(eraserActivated)
+}
 
 // Slider functionality
 
@@ -37,7 +89,7 @@ function changeGridSize() {
     // Check for and generate outline (TODO: GENERALIZE THIS SECTION)
     allGridItems.forEach(function (gridItem) {
         if (outlineVisible) {
-            gridItem.style.outline = "1px solid black";
+            gridItem.style.outline = "1px solid #4e4a4a";
         } else {
             gridItem.style.outline = "";
         }
@@ -49,7 +101,6 @@ function changeGridSize() {
 
 // Toggle grid lines
 let outlineVisible = false;
-let allGridItems = document.querySelectorAll(".single-cell");
 let gridLinesButton = document.getElementById("toggle-grid-lines");
 gridLinesButton.addEventListener('click', toggleGridLines)
 toggleGridLines();
@@ -58,7 +109,7 @@ function toggleGridLines() {
     outlineVisible = !outlineVisible;
     allGridItems.forEach(function (gridItem) {
         if (outlineVisible) {
-            gridItem.style.outline = "1px solid black";
+            gridItem.style.outline = "1px solid #4e4a4a";
         } else {
             gridItem.style.outline = "";
         }
@@ -77,10 +128,12 @@ function populateGrid(num) {
     for (let i = 0; i < num * num; i++) {
         singleCell = document.createElement('div');
         singleCell.classList.add('single-cell');
+        singleCell.setAttribute("isDrawn", "")
         singleCell.style.width = dimensions;
         singleCell.style.height = dimensions;
-        singleCell.addEventListener('mouseover', fillCell);
-        gridContainer.appendChild(singleCell)
+        singleCell.addEventListener('mousedown', fillCellOnClick);
+        singleCell.addEventListener('mouseover', fillCellOnHover);
+        gridContainer.appendChild(singleCell);
     }
 }
 
@@ -95,3 +148,4 @@ function updateGridSizeText(gridSize) {
     gridSizeText.textContent = `Grid Size: ${gridSize} x ${gridSize}`
 }
 
+// Initialize on page load
