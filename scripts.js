@@ -1,8 +1,10 @@
 // Variable declarations
 let singleCell;
+let gridRefreshCounter = 0;
 let gridContainer = document.getElementById('grid-container');
-populateGrid(24);
+initializeGrid(24);
 let allGridItems = document.querySelectorAll(".single-cell");
+
 
 // Drawing functionality
 
@@ -29,6 +31,9 @@ function changeBackgroundColor() {
             gridItem.style.backgroundColor = backgroundColor
         }
     });
+    if (eraserActivated){
+        strokeColor = backgroundColor;
+    }
 }
 
 let eraserActivated = false;
@@ -47,17 +52,22 @@ document.addEventListener('mouseup', function () {
 function fillCellOnClick() {
     this.style.backgroundColor = strokeColor;
     this.setAttribute("isDrawn", "true")
+    if (eraserActivated){
+        this.setAttribute("isDrawn", "");
+    }
 }
 
 function fillCellOnHover() {
     if (isMouseDown) {
         this.style.backgroundColor = strokeColor;
-        this.setAttribute("isDrawn", "true")
+        this.setAttribute("isDrawn", "true");
+        if (eraserActivated){
+            this.setAttribute("isDrawn", "")
+        }
     }
 };
 
 // Init
-
 
 // Eraser functionality
 
@@ -134,7 +144,22 @@ function populateGrid(num) {
         singleCell.addEventListener('mousedown', fillCellOnClick);
         singleCell.addEventListener('mouseover', fillCellOnHover);
         gridContainer.appendChild(singleCell);
-    }
+        singleCell.style.backgroundColor = backgroundColor;
+    };
+}
+
+function initializeGrid(num) {
+    let dimensions = 'calc(100%/ ' + num + ')';
+    for (let i = 0; i < num * num; i++) {
+        singleCell = document.createElement('div');
+        singleCell.classList.add('single-cell');
+        singleCell.setAttribute("isDrawn", "")
+        singleCell.style.width = dimensions;
+        singleCell.style.height = dimensions;
+        singleCell.addEventListener('mousedown', fillCellOnClick);
+        singleCell.addEventListener('mouseover', fillCellOnHover);
+        gridContainer.appendChild(singleCell);
+    };
 }
 
 function clearGrid() {
