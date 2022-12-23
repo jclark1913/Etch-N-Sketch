@@ -4,7 +4,11 @@ let gridRefreshCounter = 0;
 let gridContainer = document.getElementById('grid-container');
 initializeGrid(24);
 let allGridItems = document.querySelectorAll(".single-cell");
-
+let eraserActivated = false;
+let previousColor;
+let nonRainbowColor;
+let rainbowColor;
+let rainbowStrokeActivated = false;
 
 // Drawing functionality
 
@@ -16,6 +20,12 @@ let strokeColor = strokeColorSelector.value;
 
 function changeStrokeColor() {
     strokeColor = strokeColorSelector.value;
+    if (eraserActivated) {
+        eraserActivated = false;
+    }
+    if (rainbowStrokeActivated) {
+        rainbowStrokeActivated = false;
+    }
 }
 
 // Background Color Selector
@@ -31,13 +41,11 @@ function changeBackgroundColor() {
             gridItem.style.backgroundColor = backgroundColor
         }
     });
-    if (eraserActivated){
+    if (eraserActivated) {
         strokeColor = backgroundColor;
     }
 }
 
-let eraserActivated = false;
-let previousColor;
 
 let isMouseDown = false;
 
@@ -50,24 +58,31 @@ document.addEventListener('mouseup', function () {
 })
 
 function fillCellOnClick() {
-    this.style.backgroundColor = strokeColor;
-    this.setAttribute("isDrawn", "true")
-    if (eraserActivated){
-        this.setAttribute("isDrawn", "");
+    if (rainbowStrokeActivated) {
+        this.style.backgroundColor = randomizeStrokeColor();
+    } else {
+        this.style.backgroundColor = strokeColor;
+        this.setAttribute("isDrawn", "true")
+        if (eraserActivated) {
+            this.setAttribute("isDrawn", "");
+        }
     }
 }
 
 function fillCellOnHover() {
     if (isMouseDown) {
-        this.style.backgroundColor = strokeColor;
-        this.setAttribute("isDrawn", "true");
-        if (eraserActivated){
-            this.setAttribute("isDrawn", "")
+        if (rainbowStrokeActivated) {
+            this.style.backgroundColor = randomizeStrokeColor();
+            this.setAttribute("isDrawn", "true")
+        } else {
+            this.style.backgroundColor = strokeColor;
+            this.setAttribute("isDrawn", "true");
+            if (eraserActivated) {
+                this.setAttribute("isDrawn", "")
+            }
         }
     }
 };
-
-// Init
 
 // Eraser functionality
 
@@ -75,6 +90,9 @@ let eraserButton = document.getElementById("eraser-button");
 eraserButton.addEventListener("click", toggleEraser);
 
 function toggleEraser() {
+    if (rainbowStrokeActivated){
+        activateRainbowStroke();
+    }
     eraserActivated = !eraserActivated;
     if (eraserActivated) {
         previousColor = strokeColor;
@@ -82,7 +100,28 @@ function toggleEraser() {
     } else {
         strokeColor = previousColor;
     }
-    console.log(eraserActivated)
+}
+
+// Rainbow functionality
+
+let rainbowButton = document.getElementById("rainbow-button");
+rainbowButton.addEventListener('click', activateRainbowStroke)
+
+function activateRainbowStroke() {
+    rainbowStrokeActivated = !rainbowStrokeActivated;
+    if (rainbowStrokeActivated) {
+        nonRainbowColor = strokeColor;
+    } else {
+        strokeColor = nonRainbowColor;
+    }
+    console.log(rainbowStrokeActivated)
+}
+
+function randomizeStrokeColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 // Slider functionality

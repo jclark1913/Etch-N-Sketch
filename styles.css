@@ -11,7 +11,11 @@ body{
 .header{
     flex: 0 0 auto;
     text-align: center;
-    background: grey;
+    background: #161925;
+}
+
+h3{
+    color: rgb(255, 255, 255);
 }
 
 .main {
@@ -29,17 +33,20 @@ body{
     max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
+    background-color: #ECFEAA;
 }
 
 .options-bar {
     flex: 1 0 auto;
     min-height: 750px;
-    background-color: skyblue;
+    background-color: #7C98B3;
     display: flex;
     flex-direction: column;
     max-width: 400px;
     justify-content: center;
     align-items: center;
+    margin-right: 10px;
+    border-radius: 10px;
 }
 
 .button-container {
@@ -80,12 +87,14 @@ body{
 .grid-wrapper {
     flex: 1 0 auto;
     min-height: 750px;
-    background: lightblue;
+    background: #050609;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     max-width: 1000px;
+    border-radius: 10px;
+    background-color: #7C98B3;
 }
 
 .grid-container {
@@ -105,7 +114,7 @@ body{
 .footer {
     flex: 0 0 auto;
     text-align: center;
-    background: grey;
+    background: #161925;
 }
 
 .single-cell {
@@ -116,4 +125,8 @@ body{
     margin: 0;
     padding: 0;
     user-select: none;
+}
+
+.footer-text{
+    color: white;
 }
